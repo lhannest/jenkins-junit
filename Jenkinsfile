@@ -27,20 +27,8 @@ pipeline {
     }
     post {
         always {
-        	junit '**/target/*.xml'
-        	archive (includes: '**/target/*.xml')
-
-			  // publish html
-			  // snippet generator doesn't include "target:"
-			  // https://issues.jenkins-ci.org/browse/JENKINS-29711.
-			  publishHTML (target: [
-			      allowMissing: false,
-			      alwaysLinkToLastBuild: false,
-			      keepAll: true,
-			      reportDir: 'coverage',
-			      reportFiles: 'index.html',
-			      reportName: "RCov Report"
-			    ])
+        	archiveArtifacts artifacts: 'build/reports/**/*.html', fingerprint: true
+        	junit 'build/reports/**/*.xml'
         }
     }
 }
