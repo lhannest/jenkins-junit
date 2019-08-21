@@ -27,7 +27,7 @@ pipeline {
     }
     post {
         always {
-        	archiveArtifacts artifacts: '**/*.html', fingerprint: true
+        	archiveArtifacts artifacts: '**/build/reports/**', fingerprint: true
         }
     }
 }
